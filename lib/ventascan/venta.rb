@@ -69,7 +69,7 @@ class Venta
 
     data = [msg]
     env.messages << RocketAMF::Message.new("null", '/15', data)
-    RestClient.proxy = "http://127.0.0.1:8888"
+    #RestClient.proxy = "http://127.0.0.1:8888"
     res = RestClient.post 'http://www.ventapasajes.cl/fullpassServer/messagebroker/amf', env.to_s, :content_type => 'application/x-amf'
     RocketAMF::Envelope.new.populate_from_stream(res).messages[0].data.body
     #.each{
@@ -88,7 +88,7 @@ class Venta
     msg.body=[]
     data = [msg]
     env.messages << RocketAMF::Message.new("null", '/15', data)
-    RestClient.proxy = "http://127.0.0.1:8888"
+    #RestClient.proxy = "http://127.0.0.1:8888"
     res = RestClient.post 'http://www.ventapasajes.cl/fullpassServer/messagebroker/amf', env.to_s, :content_type => 'application/x-amf'
     RocketAMF::Envelope.new.populate_from_stream(res).messages[0].data.body.each{
       |h|
