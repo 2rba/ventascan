@@ -41,10 +41,11 @@ end
 class Venta
   class ErrorNameMissing < StandardError; end
 
-  def search
-    from_name = 'SANTIAGO'
-    to_name = 'PUCON'
-    date = Date.tomorrow.strftime('%d/%m/%Y')
+  def search(from_name,to_name,date_date)
+    #from_name = 'SANTIAGO'
+    #to_name = 'PUCON'
+    #date = Date.tomorrow.strftime('%d/%m/%Y')
+    date = date_date.strftime('%d/%m/%Y')
 
     from_code = VentaCityMap.where(city_name:from_name).first
     raise ErrorNameMissing.new "no such name city name #{from_name}" unless from_code
@@ -70,10 +71,11 @@ class Venta
     env.messages << RocketAMF::Message.new("null", '/15', data)
     RestClient.proxy = "http://127.0.0.1:8888"
     res = RestClient.post 'http://www.ventapasajes.cl/fullpassServer/messagebroker/amf', env.to_s, :content_type => 'application/x-amf'
-    RocketAMF::Envelope.new.populate_from_stream(res).messages[0].data.body.each{
-      |h|
-      p h
-    }
+    RocketAMF::Envelope.new.populate_from_stream(res).messages[0].data.body
+    #.each{
+    #  |h|
+    #  p h
+    #}
   end
 
 
