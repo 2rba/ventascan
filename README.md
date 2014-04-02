@@ -13,6 +13,7 @@ to create it use
 
 
 before first use map table should be updated with
+
     Ventascan::Venta.new.update_cities
 
 do search by
